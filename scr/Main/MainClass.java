@@ -4,6 +4,7 @@ import Interface.About;
 
 public class MainClass {
 
+
     //prueba de GUI
 
     public static void main(String[] args) {
@@ -11,4 +12,5 @@ public class MainClass {
         About about = new About();
 
     }
+
 }
