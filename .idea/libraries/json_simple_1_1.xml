@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="json-simple-1.1">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../API/jar_files/json-simple-1.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/../API/jar_files/org.json.simple-0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/API/jar_files/json-simple-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/API/jar_files/org.json.simple-0.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
