@@ -33,7 +33,7 @@ import java.util.*;
             for(int i = 0; i<15;i++){
                 for(int j = 0; j<15; j++){
                     if(relationship[i][j] == 1)
-                        edges.add(new Edge(i, j, getWeight(i,j,10)));
+                        edges.add(new Edge(i, j, Edge.getWeight(i,j,10)));
                 }
             }
         return edges;
@@ -44,7 +44,7 @@ import java.util.*;
             String destination = cities.get(dest);
 
             //Get distance
-            float distance = DistancieApis.getData(origin,destination);
+            float distance = DistancieApis.getData(origin + "CostaRica",destination + "CostaRica");
 
             // Conversion to time
             float time = distance/80;
@@ -53,9 +53,11 @@ import java.util.*;
             float timeMinutes = time/60;
 
             // create weight
-            int weight = Math.round(timeMinutes) + delay;
 
-            return weight;
+            return Math.round(timeMinutes) + delay;
+        }
+        public static String getName(int scr){
+            return cities.get(scr);
         }
     }
     // Graph class
@@ -63,8 +65,10 @@ import java.util.*;
         // node of adjacency list
         static class Node {
             int value, weight;
+            String name;
             Node(int value, int weight)  {
                 this.value = value;
+                this.name = Edge.getName(value);
                 this.weight = weight;
             }
         };
@@ -77,7 +81,7 @@ import java.util.*;
         public Graph(List<Edge> edges)
         {
             // adjacency list memory allocation
-            for (int i = 0; i < edges.size(); i++)
+            for (int i = 0; i < 15; i++)
                 adj_list.add(i, new ArrayList<>());
 
             // add edges to the graph
@@ -95,9 +99,9 @@ import java.util.*;
             System.out.println("The contents of the graph:");
             while (src_vertex < list_size) {
                 //traverse through the adjacency list and print the edges
+                System.out.print("Vertex:" + src_vertex);
                 for (Node edge : graph.adj_list.get(src_vertex)) {
-                    System.out.print("Vertex:" + src_vertex + " ==> " + edge.value +
-                            " (" + edge.weight + ")\t");
+                    System.out.print(" from: "+ Edge.getName(src_vertex) + " to: " + edge.name + " peso: " + edge.weight + " \t");
                 }
 
                 System.out.println();
@@ -106,14 +110,14 @@ import java.util.*;
         }
     }
     class Main{
-        public static void main (String[] args) {
+        public static void main (String[] args) throws Exception {
             // define edges of the graph
             List<Edge> edges = Arrays.asList(new Edge(0, 1, 2),new Edge(0, 2, 4),
                     new Edge(1, 2, 4),new Edge(2, 0, 5), new Edge(2, 1, 4),
                     new Edge(3, 2, 3), new Edge(4, 5, 1),new Edge(5, 4, 3));
 
             // call graph class Constructor to construct a graph
-            Graph graph = new Graph(edges);
+            Graph graph = new Graph(Edge.createEdgeList());
 
             // print the graph as an adjacency list
             Graph.printGraph(graph);
