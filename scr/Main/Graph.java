@@ -10,13 +10,19 @@ import java.util.*;
             this.dest = dest;
             this.weight = weight;
         }
-        public static List<Edge> createEdgeList(){
-            List<Edge> edges = Arrays.asList(new Edge(0, 1, 2),new Edge(0, 2, 4),
-                    new Edge(1, 2, 4),new Edge(2, 0, 5), new Edge(2, 1, 4),
-                    new Edge(3, 2, 3), new Edge(4, 5, 1),new Edge(5, 4, 3));
+        public static List<Edge> createEdgeList() throws Exception {
+            List<Edge> edges = Arrays.asList(new Edge(0, 1, getWeight(0,1,10)),
+                    new Edge(1, 5, getWeight(1,5,10)),
+                    new Edge(1, 2, getWeight(1,2,10)),
+                    new Edge(2, 1, getWeight(2,1,10)),
+                    new Edge(2, 5, getWeight(2,5,10)),
+                    new Edge(2, 4, getWeight(2,4,10)),
+                    new Edge(2, 3, getWeight(2,3,10)),
+                    new Edge(3, 5, getWeight(3,5,10)),
+            new Edge(3, 5, getWeight(3,5,10)));
         return edges;
         }
-        public static int getWeight(int src, int dest) throws Exception {
+        public static int getWeight(int src, int dest , int delay) throws Exception {
             // Get city's names
             String origin = cities.get(src);
             String destination = cities.get(dest);
@@ -30,7 +36,10 @@ import java.util.*;
             // conversion to minutes
             float timeMinutes = time/60;
 
-            int weight = Math.round(timeMinutes)
+            // create weight
+            int weight = Math.round(timeMinutes) + delay;
+
+            return weight;
         }
     }
     // Graph class
