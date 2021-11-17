@@ -11,15 +11,31 @@ import java.util.*;
             this.weight = weight;
         }
         public static List<Edge> createEdgeList() throws Exception {
-            List<Edge> edges = Arrays.asList(new Edge(0, 1, getWeight(0,1,10)),
-                    new Edge(1, 5, getWeight(1,5,10)),
-                    new Edge(1, 2, getWeight(1,2,10)),
-                    new Edge(2, 1, getWeight(2,1,10)),
-                    new Edge(2, 5, getWeight(2,5,10)),
-                    new Edge(2, 4, getWeight(2,4,10)),
-                    new Edge(2, 3, getWeight(2,3,10)),
-                    new Edge(3, 5, getWeight(3,5,10)),
-            new Edge(3, 5, getWeight(3,5,10)));
+            int[][] relationship =
+                    //       0, 1, 2, 3, 4, 5, 6, 7, 8, 9,10,11,12,13,14
+                    {       {0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //0
+                            {1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //1
+                            {0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //2
+                            {0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //3
+                            {0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, //4
+                            {0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0}, //5
+                            {0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0}, //6
+                            {0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0}, //7
+                            {0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0}, //8
+                            {0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0}, //9
+                            {0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1}, //10
+                            {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0}, //11
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0}, //12
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1}, //13
+                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0}, //14
+                    };
+            List<Edge> edges = new ArrayList<Edge>(List.of());
+            for(int i = 0; i<15;i++){
+                for(int j = 0; j<15; j++){
+                    if(relationship[i][j] == 1)
+                        edges.add(new Edge(i, j, getWeight(i,j,10)));
+                }
+            }
         return edges;
         }
         public static int getWeight(int src, int dest , int delay) throws Exception {
