@@ -45,12 +45,15 @@ import java.util.*;
 
             //Get distance
             float distance = DistancieApis.getData(origin + "CostaRica",destination + "CostaRica");
+            System.out.println("La distancia es:");
+            System.out.println(distance);
 
             // Conversion to time
             float time = distance/80;
 
             // conversion to minutes
-            float timeMinutes = time/60;
+            float timeMinutes = time*60;
+            System.out.println("El tiempo en min es : " + timeMinutes);
 
             // create weight
 
@@ -111,10 +114,6 @@ import java.util.*;
     }
     class Main{
         public static void main (String[] args) throws Exception {
-            // define edges of the graph
-            List<Edge> edges = Arrays.asList(new Edge(0, 1, 2),new Edge(0, 2, 4),
-                    new Edge(1, 2, 4),new Edge(2, 0, 5), new Edge(2, 1, 4),
-                    new Edge(3, 2, 3), new Edge(4, 5, 1),new Edge(5, 4, 3));
 
             // call graph class Constructor to construct a graph
             Graph graph = new Graph(Edge.createEdgeList());
