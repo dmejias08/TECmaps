@@ -143,7 +143,7 @@ import java.util.*;
 
             int CO;
             int headIndex = index;
-            double[] distance = new double[15];d
+            double[] distance = new double[15];
 
             distance = new double[15];
             for (int i = 0; i < 15 ; i++) {
