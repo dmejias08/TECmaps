@@ -10,8 +10,6 @@ import java.awt.event.KeyListener;
 
 public class About extends JFrame implements KeyListener {
 
-    // es necesario crear una clase button para hacer el manejo de el ActionPerformed
-
     public String[] sortCities = SortSearch.getSortedList();
     public JPanel pane;
     static JTextField search;
@@ -34,21 +32,23 @@ public class About extends JFrame implements KeyListener {
 
         search = new JTextField();
         search.setSize(200,30);
-        search.setLocation(40,50);
+        search.setLocation(60,50);
         search.addKeyListener(this);
         pane.add(search);
 
         title = new JLabel("Información de Destinos Disponibles");
         title.setSize(250,20);
-        title.setLocation(50, 20);
+        title.setLocation(75, 20);
         title.setFont(font);
         pane.add(this.title);
 
         bsearch = new JButton("Buscar");
         bsearch.setSize(75, 30);
-        bsearch.setLocation(245,50);
+        bsearch.setLocation(265,50);
         bsearch.addActionListener(new ButtonListener());
         pane.add(bsearch);
+
+        printButtons();
 
         this.pane.repaint();
         this.setDefaultCloseOperation(3);
@@ -71,6 +71,26 @@ public class About extends JFrame implements KeyListener {
 
     }
 
+    public void printButtons (){
+
+        int x = 125;
+        int y = 100;
+
+        for(int i = 0; i < sortCities.length; i++){
+
+            createButton(sortCities[i], x, y);
+            y += 30;
+
+        }
+
+    }
+
+    public void createButton (String city, int x, int y){
+
+        CittyButton nuevo = new CittyButton(this, city, x, y);
+
+    }
+
     static class ButtonListener implements ActionListener{
 
         @Override
@@ -85,7 +105,17 @@ public class About extends JFrame implements KeyListener {
             }else {
                 JOptionPane.showMessageDialog(null, "Lugar no encontrado");
             }
-            //aquí se hace la búsqueda
         }
+    }
+
+    static class CittyButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+
+
+        }
+
     }
 }
