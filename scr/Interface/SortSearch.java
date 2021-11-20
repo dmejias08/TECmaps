@@ -1,6 +1,13 @@
 package Interface;
 
+
+
+import java.util.Arrays;
+import java.util.List;
+
 public class SortSearch {
+    public static  String[] arr = {"Quebradilla","Tejar", "Cartago", "Paraiso","Turrialba", "Ochomogo", "Tres Rios", "Curridabat", "Desamparados", "San Pedro", "San Jose", "Santa Ana","Ciudad Colon", "Alajuela", "Heredia"};
+    public static final List<String> cities = Arrays.asList("Quebradilla","Tejar", "Cartago", "Paraiso","Turrialba", "Ochomogo", "Tres Rios", "Curridabat", "Desamparados", "San Pedro", "San Jose", "Santa Ana","Ciudad Colon", "Alajuela", "Heredia");
     // A utility function to swap two elements
     static void swap(String[] arr, int i, int j)
     {
@@ -39,6 +46,7 @@ public class SortSearch {
                         swap(arr, i, j);
                         break;
                     }
+                    break;
                 }
             }
         }
@@ -65,6 +73,12 @@ public class SortSearch {
         }
     }
 
+   // return sorted array
+    static String[] getSortedList(){
+        quickSort(arr,0,arr.length-1);
+        printArray(arr,arr.length);
+        return arr;
+    }
     // Function to print an array
     static void printArray(String[] arr, int size)
     {
@@ -72,11 +86,13 @@ public class SortSearch {
             System.out.print(arr[i] + " ");
 
         System.out.println();
+
     }
-    static String linelSearch(String[] arr, int size, String target){
-        for(int i = 0; i < size; i++) {
-            if(arr[i] == target){
+    public static String linelSearch( String target){
+        for(int i = 0; i < cities.size(); i++) {
+            if(cities.get(i) .equals(target) ){
                 return "found";
+
             }
         }
         return "notfound";

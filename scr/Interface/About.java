@@ -12,6 +12,7 @@ public class About extends JFrame implements KeyListener {
 
     // es necesario crear una clase button para hacer el manejo de el ActionPerformed
 
+    public String[] sortCities = SortSearch.getSortedList();
     public JPanel pane;
     static JTextField search;
     public JLabel title;
@@ -76,6 +77,14 @@ public class About extends JFrame implements KeyListener {
         public void actionPerformed(ActionEvent e) {
 
             String place = search.getText();
+            System.out.println(place);
+            System.out.println(SortSearch.linelSearch(place));
+
+            if(SortSearch.linelSearch(place) == "found"){
+                Places.getInfo(place);
+            }else {
+                JOptionPane.showMessageDialog(null, "Lugar no encontrado");
+            }
             //aquí se hace la búsqueda
         }
     }
