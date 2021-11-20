@@ -42,9 +42,9 @@ public class DistancieApis {
 
 
     public static void main(String[] args) throws Exception {
-        System.out.println(getData("TejarCartago","OchomogoCartago"));
-        System.out.println(getData("CartagoCartago","OchomogoCartago"));
-        System.out.println(getData("CartagoCartago","TejarCartago"));
+        //System.out.println(getData("TejarCartago","OchomogoCartago"));
+        //System.out.println(getData("CartagoCartago","OchomogoCartago"));
+        //System.out.println(getData("CartagoCartago","TejarCartago"));
     }
 
 }

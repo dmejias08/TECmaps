@@ -33,7 +33,7 @@ import java.util.*;
             for(int i = 0; i<15;i++){
                 for(int j = 0; j<15; j++){
                     if(relationship[i][j] == 1)
-                        edges.add(new Edge(i, j, Edge.getWeight(i,j,10)));
+                        edges.add(new Edge(i, j, Edge.getWeight(i,j,0)));
                 }
             }
         return edges;
@@ -45,15 +45,15 @@ import java.util.*;
 
             //Get distance
             float distance = DistancieApis.getData(origin + "CostaRica",destination + "CostaRica");
-            System.out.println("La distancia es:");
-            System.out.println(distance);
+//            System.out.println("La distancia es:");
+//            System.out.println(distance);
 
             // Conversion to time
             float time = distance/80;
 
             // conversion to minutes
             float timeMinutes = time*60;
-            System.out.println("El tiempo en min es : " + timeMinutes);
+//            System.out.println("El tiempo en min es : " + timeMinutes);
 
             // create weight
 
@@ -80,9 +80,14 @@ import java.util.*;
 
         List<List<Node>> adj_list = new ArrayList<>();
 
+        // Atributes
+        boolean[] isVisited;
+
         //Graph Constructor
         public Graph(List<Edge> edges)
         {
+            isVisited = new boolean[16];
+
             // adjacency list memory allocation
             for (int i = 0; i < 15; i++)
                 adj_list.add(i, new ArrayList<>());
@@ -99,6 +104,7 @@ import java.util.*;
             int src_vertex = 0;
             int list_size = graph.adj_list.size();
 
+
             System.out.println("The contents of the graph:");
             while (src_vertex < list_size) {
                 //traverse through the adjacency list and print the edges
@@ -111,7 +117,107 @@ import java.util.*;
                 src_vertex++;
             }
         }
+
+        private int coWeight(int index, int CO){
+
+            for(int i = 0; i < adj_list.get(index).size(); i++){
+                if(adj_list.get(index).get(i).value == CO)
+                    return adj_list.get(index).get(i).weight;
+            }
+            return 0;
+
+        }
+        private int coNextValue(int index, int CO){
+
+            for(int i = 0; i < adj_list.get(index).size()-1; i++){
+                if(adj_list.get(index).get(i).value == CO)
+                    return adj_list.get(index).get(i+1).value;
+            }
+            return -1;
+
+        }
+
+
+        public void dijkStra(int index ){
+
+
+            int CO;
+            int headIndex = index;
+            double[] distance = new double[15];
+
+            distance = new double[15];
+            for (int i = 0; i < 15 ; i++) {
+                distance[i] = Double.POSITIVE_INFINITY;
+            }
+
+            String[] path = new String[15];
+            for (int i = 0; i < 15 ; i++) {
+                path[i] = "";
+            }
+
+
+            distance[index]=0;
+
+
+            while (!isVisited[headIndex]){
+
+                // CO es la primera CO que no ha sido visitada
+                CO = adj_list.get(headIndex).get(0).value;
+                int limit = adj_list.get(headIndex).size();
+                while(isVisited[CO]){
+                    CO = coNextValue(headIndex, CO);
+                    if (CO == -1) break;
+                }
+
+                if (CO==-1) {
+                    isVisited[headIndex]=true;
+                    //System.out.println("Coordinate not found ");
+                }
+                else {
+                    while (!isVisited[CO]) {
+                        isVisited[headIndex]=true;
+                        double currentDis = distance[headIndex]+coWeight(headIndex,CO);
+                        if (currentDis<distance[CO]) {
+                            distance[CO] = currentDis;
+
+                            path[CO] = path[headIndex]+" "+Edge.getName(headIndex);
+                        }
+                        CO = coNextValue(headIndex, CO);
+                        if (CO == -1)
+                            break;
+
+                    }
+                }
+
+                headIndex = indexGet(distance,isVisited);
+
+
+            }
+            for (int i = 0; i <15 ; i++) {
+                path[i] = path[i]+" "+Edge.getName(i);
+            }
+            System.out.println("Iniciar nodo:"+Edge.getName(index));
+            for (int i = 0; i <15 ; i++) {
+                System.out.println(Edge.getName(i)+"   "+distance[i]+"   "+path[i]);
+            }
+
+
+        }
+        public int indexGet(double[] distance, boolean[] isVisited){
+            int j=0;
+            double mindis=Double.POSITIVE_INFINITY;
+            for (int i = 0; i < distance.length; i++) {
+                if (!isVisited[i]){
+                    if(distance[i]<mindis){
+                        mindis=distance[i];
+                        j=i;
+                    }
+                }
+            }
+            return j;
+        }
     }
+
     class Main{
         public static void main (String[] args) throws Exception {
 
@@ -119,7 +225,10 @@ import java.util.*;
             Graph graph = new Graph(Edge.createEdgeList());
 
             // print the graph as an adjacency list
-            Graph.printGraph(graph);
+            System.out.println(graph.adj_list.get(1).get(2).value);
+            graph.dijkStra(0);
+            //Graph.printGraph(graph);
         }
     }
+
 
