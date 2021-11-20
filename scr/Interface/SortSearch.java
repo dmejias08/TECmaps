@@ -45,8 +45,12 @@ public class SortSearch {
                         i++;
                         swap(arr, i, j);
                         break;
+                    }else if (arr[j].charAt(k) == pivot.charAt(k)){
+                         continue;
+                    }else {
+                        break;
                     }
-                    break;
+
                 }
             }
         }
