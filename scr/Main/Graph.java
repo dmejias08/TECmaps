@@ -29,7 +29,7 @@ import java.util.*;
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 1}, //13
                             {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0}, //14
                     };
-            List<Edge> edges = new ArrayList<Edge>(List.of());
+            List<Edge> edges = new ArrayList<>(List.of());
             for(int i = 0; i<15;i++){
                 for(int j = 0; j<15; j++){
                     if(relationship[i][j] == 1)
@@ -74,7 +74,7 @@ import java.util.*;
                 this.name = Edge.getName(value);
                 this.weight = weight;
             }
-        };
+        }
 
 // define adjacency list
 
@@ -143,11 +143,9 @@ import java.util.*;
 
             int CO;
             int headIndex = index;
-            double[] distance = new double[15];
-
-            distance = new double[15];
+            float[] distance = new float[15];
             for (int i = 0; i < 15 ; i++) {
-                distance[i] = Double.POSITIVE_INFINITY;
+                distance[i] = Float.POSITIVE_INFINITY;
             }
 
             String[] path = new String[15];
@@ -163,7 +161,6 @@ import java.util.*;
 
                 // CO es la primera CO que no ha sido visitada
                 CO = adj_list.get(headIndex).get(0).value;
-                int limit = adj_list.get(headIndex).size();
                 while(isVisited[CO]){
                     CO = coNextValue(headIndex, CO);
                     if (CO == -1) break;
@@ -176,7 +173,7 @@ import java.util.*;
                 else {
                     while (!isVisited[CO]) {
                         isVisited[headIndex]=true;
-                        double currentDis = distance[headIndex]+coWeight(headIndex,CO);
+                        float currentDis = distance[headIndex]+coWeight(headIndex,CO);
                         if (currentDis<distance[CO]) {
                             distance[CO] = currentDis;
 
@@ -203,7 +200,7 @@ import java.util.*;
 
 
         }
-        public int indexGet(double[] distance, boolean[] isVisited){
+        public int indexGet(float[] distance, boolean[] isVisited){
             int j=0;
             double mindis=Double.POSITIVE_INFINITY;
             for (int i = 0; i < distance.length; i++) {
