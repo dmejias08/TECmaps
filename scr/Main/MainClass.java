@@ -12,8 +12,9 @@ public class MainClass {
     //prueba de GUI
 
     public static void main(String[] args) {
+        MainInterface MainInter = new MainInterface();
 
-        About about = new About();
+//        About about = new About();
 
 //        System.out.println(SortSearch.linelSearch("Tejar"));
 
