@@ -51,7 +51,7 @@ public class About extends JFrame implements KeyListener {
         printButtons();
 
         this.pane.repaint();
-        this.setDefaultCloseOperation(3);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
     }
 

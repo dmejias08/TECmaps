@@ -15,9 +15,6 @@ public class DistancieApis {
     public static float[][] distances;
     public static float[][] times;
 
-
-
-
     //downloading the data
     public static float getData(String source, String destination) throws Exception {
         float distance = -1L;
@@ -38,8 +35,6 @@ public class DistancieApis {
         return distancia;
 
     }
-
-
 
     public static void main(String[] args) throws Exception {
         //System.out.println(getData("TejarCartago","OchomogoCartago"));
