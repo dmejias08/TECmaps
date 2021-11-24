@@ -38,7 +38,7 @@ import java.util.*;
             }
         return edges;
         }
-        public static int getWeight(int src, int dest , int delay) throws Exception {
+        private static int getWeight(int src, int dest , int delay) throws Exception {
             // Get city's names
             String origin = cities.get(src);
             String destination = cities.get(dest);
@@ -62,6 +62,9 @@ import java.util.*;
         public static String getName(int scr){
             return cities.get(scr);
         }
+        public static int getCode(String Name){
+            return cities.indexOf(Name);
+        }
     }
     // Graph class
     class Graph {
@@ -81,12 +84,12 @@ import java.util.*;
         List<List<Node>> adj_list = new ArrayList<>();
 
         // Atributes
-        boolean[] isVisited;
+
 
         //Graph Constructor
         public Graph(List<Edge> edges)
         {
-            isVisited = new boolean[16];
+
 
             // adjacency list memory allocation
             for (int i = 0; i < 15; i++)
@@ -138,7 +141,7 @@ import java.util.*;
         }
 
 
-        public String[] dijkStra(int index, int end){
+        public String[] dijkStra(int index, int end, int delay){
 
 
             int CO;
@@ -152,6 +155,7 @@ import java.util.*;
             for (int i = 0; i < 15 ; i++) {
                 path[i] = "";
             }
+            boolean[] isVisited = new boolean[16];
 
 
             distance[index]=0;
@@ -173,7 +177,7 @@ import java.util.*;
                 else {
                     while (!isVisited[CO]) {
                         isVisited[headIndex]=true;
-                        float currentDis = distance[headIndex]+coWeight(headIndex,CO);
+                        float currentDis = distance[headIndex] + coWeight(headIndex,CO) + delay;
                         if (currentDis<distance[CO]) {
                             distance[CO] = currentDis;
 
@@ -195,7 +199,7 @@ import java.util.*;
             }
  //           System.out.println("Iniciar nodo:"+Edge.getName(index));
 //            for (int i = 0; i <15 ; i++) {
-//                System.out.println(Edge.getName(i)+"   "+distance[i]+"   "+path[i]);
+                System.out.println(Edge.getName(end)+"   "+distance[end]+"   "+path[end]);
 //            }
             return new String[]{Edge.getName(end), String.valueOf(distance[end]), path[end]};
 
@@ -216,17 +220,17 @@ import java.util.*;
         }
     }
 
-    class Main{
-        public static void main (String[] args) throws Exception {
-
-            // call graph class Constructor to construct a graph
-            Graph graph = new Graph(Edge.createEdgeList());
-
-            // print the graph as an adjacency list
-            System.out.println(graph.adj_list.get(1).get(2).value);
-            System.out.println(graph.dijkStra(0, 4)[1]);
-            //Graph.printGraph(graph);
-        }
-    }
+//    class Main{
+//        public static void main (String[] args) throws Exception {
+//
+//            // call graph class Constructor to construct a graph
+//            Graph graph = new Graph(Edge.createEdgeList());
+//
+//            // print the graph as an adjacency list
+//            System.out.println(graph.adj_list.get(1).get(2).value);
+//            System.out.println(graph.dijkStra(0, 4)[1]);
+//            //Graph.printGraph(graph);
+//        }
+//    }
 
 

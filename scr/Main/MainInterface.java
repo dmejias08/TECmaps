@@ -8,7 +8,7 @@ import Interface.Places;
 import Interface.SortSearch;
 
 public class MainInterface extends JFrame implements ActionListener, KeyListener, MouseListener {
-    public static String[] places = {"Quebradilla","Tejar", "Cartago", "Paraiso","Turrialba", "Ochomogo", "Tres Rios", "Curridabat", "Desamparados", "San Pedro", "San Jose", "Santa Ana","Ciudad Colon", "Alajuela", "Heredia"};
+    public static String[] places = Edge.cities.toArray(new String[0]);
     public static About about;
     public JPanel pane;
     public JButton calculate;
@@ -24,6 +24,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
     public JLabel map;
     public JTextField delay;
     public ImageIcon mapPic;
+    private Graph graph;
 
     public MainInterface() {
         this.setTitle("TEC Maps");
@@ -80,20 +81,20 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         pane.add(lDelay);
 
         lDetail = new JLabel("DETALLES DE VIAJE");
-        lDetail.setSize(300,40);
-        lDetail.setLocation(850, 150);
+        lDetail.setSize(200,40);
+        lDetail.setLocation(850, 100);
         lDetail.setFont(new Font("Girassol",Font.HANGING_BASELINE ,18));
         pane.add(lDetail);
 
-        lDistance = new JLabel("Distancia:");
-        lDistance.setSize(300,40);
-        lDistance.setLocation(850, 225);
+        lDistance = new JLabel("Recorrido:");
+        lDistance.setSize(200,250);
+        lDistance.setLocation(850, 150);
         lDistance.setFont(new Font("Girassol",Font.PLAIN,16));
         pane.add(lDistance);
 
         lTime = new JLabel("Tiempo:");
-        lTime.setSize(300,40);
-        lTime.setLocation(850, 300);
+        lTime.setSize(200,40);
+        lTime.setLocation(850, 400);
         lTime.setFont(new Font("Girassol",Font.PLAIN,16));
         pane.add(lTime);
 
@@ -120,6 +121,15 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
+        System.out.println("Iniciando...");
+
+        try {
+            this.graph = new Graph(Edge.createEdgeList());
+            System.out.println("Iniciado");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
@@ -136,10 +146,28 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
                 } else {
                     dlay = Integer.parseInt(delay.getText());
                 }
-                //Aqui se llama al algoritmo que calcula distancia y tiempo
-                System.out.println(strt);
-                System.out.println(fnal);
-                System.out.println(dlay);
+                if (graph != null) {
+                    int startPlace = Edge.getCode(strt);
+                    int endPlace = Edge.getCode(fnal);
+                    System.out.println(startPlace);
+                    System.out.println(endPlace);
+                    System.out.println(dlay);
+
+                    String[] result = graph.dijkStra(startPlace, endPlace, dlay);
+
+//                    System.out.println(result[0] + " " + result[1] + " " + result [2]);
+
+                    lDistance.setText("<html>Recorrido: " + result[2].replace(" ", "</p><p>->") +"</p></html>");
+                    lTime.setText("Tiempo: " + result[1]);
+                }
+                else {
+                    JOptionPane.showMessageDialog(null, "Por favor espere, trabajamos en ello");
+                }
+
+
+//                System.out.println(strt);
+//                System.out.println(fnal);
+//                System.out.println(dlay);
 
             }
 
