@@ -138,7 +138,7 @@ import java.util.*;
         }
 
 
-        public void dijkStra(int index ){
+        public String[] dijkStra(int index, int end){
 
 
             int CO;
@@ -193,10 +193,11 @@ import java.util.*;
             for (int i = 0; i <15 ; i++) {
                 path[i] = path[i]+" "+Edge.getName(i);
             }
-            System.out.println("Iniciar nodo:"+Edge.getName(index));
-            for (int i = 0; i <15 ; i++) {
-                System.out.println(Edge.getName(i)+"   "+distance[i]+"   "+path[i]);
-            }
+ //           System.out.println("Iniciar nodo:"+Edge.getName(index));
+//            for (int i = 0; i <15 ; i++) {
+//                System.out.println(Edge.getName(i)+"   "+distance[i]+"   "+path[i]);
+//            }
+            return new String[]{Edge.getName(end), String.valueOf(distance[end]), path[end]};
 
 
         }
@@ -223,7 +224,7 @@ import java.util.*;
 
             // print the graph as an adjacency list
             System.out.println(graph.adj_list.get(1).get(2).value);
-            graph.dijkStra(0);
+            System.out.println(graph.dijkStra(0, 4)[1]);
             //Graph.printGraph(graph);
         }
     }
