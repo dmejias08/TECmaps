@@ -12,7 +12,7 @@ public class CittyButton implements ActionListener {
 
     public CittyButton(About screen, String place, int x, int y) {
 
-        // City Button constructor
+        // City Button constructor.
 
         this.screen = screen;
         this.place = place;

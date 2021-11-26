@@ -19,7 +19,7 @@ public class About extends JFrame implements KeyListener {
 
     public About() {
 
-        // Secondary interface constructor
+        // Secondary interface constructor.
 
         this.setTitle("Información Adicional");
         this.setVisible(true);
@@ -76,7 +76,7 @@ public class About extends JFrame implements KeyListener {
     /* This function makes a for cycle and ranges
     for every city in the sorted array of cities.
     Additionally, creates a button for every one
-    of them. */
+    of them */
 
     public void printButtons (){
 
@@ -92,7 +92,7 @@ public class About extends JFrame implements KeyListener {
 
     }
 
-    /* This funtion creates a CityButton instance. */
+    /* This funtion creates a CityButton instance */
 
     public void createButton (String city, int x, int y){
 
@@ -104,7 +104,7 @@ public class About extends JFrame implements KeyListener {
     * search button, when the action is performed
     * it calls the function linelSearch from the
     * class SortSearch and looks for the destination
-    * information. */
+    * information */
 
     static class ButtonListener implements ActionListener{
 
