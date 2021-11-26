@@ -2,6 +2,7 @@ package Main;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 
 import Interface.About;
 import Interface.Places;
@@ -9,6 +10,8 @@ import Interface.SortSearch;
 
 public class MainInterface extends JFrame implements ActionListener, KeyListener, MouseListener {
     public static String[] places = Edge.cities.toArray(new String[0]);
+    public ArrayList blueImages=new ArrayList();
+    public ArrayList redImages=new ArrayList();
     public static About about;
     public JPanel pane;
     public JButton calculate;
@@ -116,6 +119,10 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         delay.setFont(new Font("Girassol",Font.PLAIN,16));
         delay.addKeyListener(this);
         pane.add(delay);
+
+        for (int i=2; i<32; i+=2){
+            JLabel image;
+        }
 
         pane.repaint();
 
@@ -231,3 +238,4 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         }
     }
 }
+
