@@ -111,9 +111,10 @@ public class About extends JFrame implements KeyListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+
             String place = search.getText();
-            System.out.println(place);
-            System.out.println(SortSearch.linelSearch(place));
+            //System.out.println(place);
+            //System.out.println(SortSearch.linelSearch(place));
 
             if(SortSearch.linelSearch(place) == "found"){
                 Places.getInfo(place);
