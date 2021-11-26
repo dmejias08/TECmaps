@@ -5,8 +5,6 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 import Interface.About;
-import Interface.Places;
-import Interface.SortSearch;
 
 public class MainInterface extends JFrame implements ActionListener, KeyListener, MouseListener {
     public static String[] places = Edge.cities.toArray(new String[0]);
@@ -48,7 +46,6 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
             imagePlace.setLocation(0,80);
             imagePlace.setVisible(false);
             pane.add(imagePlace);
-//            pane.setComponentZOrder(imagePlace,10);
             if (i%2==0) {
                 blueImages.add(imagePlace);
             } else {
@@ -60,7 +57,6 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         map = new JLabel(mapPic);
         map.setSize(823,650);
         map.setLocation(0,80);
-//        map.setVisible(false);
         pane.add(map);
 
         calculate = new JButton("");
@@ -142,11 +138,11 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        System.out.println("Iniciando...");
+        JOptionPane.showMessageDialog(null,"Iniciando...");
 
         try {
             this.graph = new Graph(Edge.createEdgeList());
-            System.out.println("Iniciado");
+            JOptionPane.showMessageDialog(null,"Iniciado");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -174,21 +170,11 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
                 if (graph != null) {
                     int startPlace = Edge.getCode(strt);
                     int endPlace = Edge.getCode(fnal);
-//                    System.out.println(startPlace);
-//                    System.out.println(endPlace);
-//                    System.out.println(dlay);
 
                     String[] result = graph.dijkStra(startPlace, endPlace, dlay);
-
-//                    System.out.println(result[0] + " " + result[1] + " " + result [2]);
                     String[] places = result[2].substring(1).split(" ");
-//                    System.out.println("Result2");
-//                    System.out.println(result[2]);
-//                    System.out.println("Places");
-//                    System.out.println(places);
+
                     for (int i=0; i<places.length; i++) {
-                        System.out.println(places[i]);
-                        System.out.println(Edge.getCode(places[i]));
                         if (i==0 || i==places.length-1){
                             redImages.get(Edge.getCode(places[i])).setVisible(true);
                         } else {
@@ -202,12 +188,6 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
                 else {
                     JOptionPane.showMessageDialog(null, "Por favor espere, trabajamos en ello");
                 }
-
-
-//                System.out.println(strt);
-//                System.out.println(fnal);
-//                System.out.println(dlay);
-
             }
 
         } else if (e.getSource() == additional){
