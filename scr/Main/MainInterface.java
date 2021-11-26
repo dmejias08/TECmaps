@@ -29,7 +29,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
     public MainInterface() {
         this.setTitle("TEC Maps");
         this.setVisible(true);
-        this.setSize(1100, 730);
+        this.setSize(1100, 750);
         this.setResizable(false);
         pane = new JPanel();
         this.getContentPane().add(pane);
