@@ -149,9 +149,9 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
                 if (graph != null) {
                     int startPlace = Edge.getCode(strt);
                     int endPlace = Edge.getCode(fnal);
-                    System.out.println(startPlace);
-                    System.out.println(endPlace);
-                    System.out.println(dlay);
+//                    System.out.println(startPlace);
+//                    System.out.println(endPlace);
+//                    System.out.println(dlay);
 
                     String[] result = graph.dijkStra(startPlace, endPlace, dlay);
 
