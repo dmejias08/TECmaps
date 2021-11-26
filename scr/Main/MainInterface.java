@@ -10,8 +10,8 @@ import Interface.SortSearch;
 
 public class MainInterface extends JFrame implements ActionListener, KeyListener, MouseListener {
     public static String[] places = Edge.cities.toArray(new String[0]);
-    public ArrayList blueImages=new ArrayList();
-    public ArrayList redImages=new ArrayList();
+    public ArrayList<JLabel> blueImages=new ArrayList<>();
+    public ArrayList<JLabel> redImages=new ArrayList<>();
     public static About about;
     public JPanel pane;
     public JButton calculate;
@@ -39,10 +39,28 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         pane.setLayout(null);
         pane.setBackground(Color.decode("#fff9eb"));
 
+        for (int i=2; i<32; i++){
+            JLabel imagePlace;
+            ImageIcon image;
+            image= new ImageIcon("assets/grafos/"+String.valueOf(i)+".png");
+            imagePlace = new JLabel(image);
+            imagePlace.setSize(823,650);
+            imagePlace.setLocation(0,80);
+            imagePlace.setVisible(false);
+            pane.add(imagePlace);
+//            pane.setComponentZOrder(imagePlace,10);
+            if (i%2==0) {
+                blueImages.add(imagePlace);
+            } else {
+                redImages.add(imagePlace);
+            }
+        }
+
         mapPic= new ImageIcon("assets/map.png");
         map = new JLabel(mapPic);
         map.setSize(823,650);
         map.setLocation(0,80);
+//        map.setVisible(false);
         pane.add(map);
 
         calculate = new JButton("");
@@ -120,10 +138,6 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         delay.addKeyListener(this);
         pane.add(delay);
 
-        for (int i=2; i<32; i+=2){
-            JLabel image;
-        }
-
         pane.repaint();
 
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -142,6 +156,10 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == calculate){
+            for (int i=0; i<15; i++){
+                blueImages.get(i).setVisible(false);
+                redImages.get(i).setVisible(false);
+            }
             String strt, fnal;
             int dlay;
             strt = start.getSelectedItem().toString();
@@ -163,6 +181,20 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
                     String[] result = graph.dijkStra(startPlace, endPlace, dlay);
 
 //                    System.out.println(result[0] + " " + result[1] + " " + result [2]);
+                    String[] places = result[2].substring(1).split(" ");
+//                    System.out.println("Result2");
+//                    System.out.println(result[2]);
+//                    System.out.println("Places");
+//                    System.out.println(places);
+                    for (int i=0; i<places.length; i++) {
+                        System.out.println(places[i]);
+                        System.out.println(Edge.getCode(places[i]));
+                        if (i==0 || i==places.length-1){
+                            redImages.get(Edge.getCode(places[i])).setVisible(true);
+                        } else {
+                            blueImages.get(Edge.getCode(places[i])).setVisible(true);
+                        }
+                    }
 
                     lDistance.setText("<html>Recorrido: " + result[2].replace(" ", "</p><p>->") +"</p></html>");
                     lTime.setText("Tiempo: " + result[1]);
