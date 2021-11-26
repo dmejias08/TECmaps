@@ -33,6 +33,7 @@ import java.util.*;
             for(int i = 0; i<15;i++){
                 for(int j = 0; j<15; j++){
                     if(relationship[i][j] == 1)
+//                        edges.add(new Edge(i, j, 1));
                         edges.add(new Edge(i, j, Edge.getWeight(i,j,0)));
                 }
             }
@@ -175,7 +176,9 @@ import java.util.*;
                     //System.out.println("Coordinate not found ");
                 }
                 else {
-                    while (!isVisited[CO]) {
+                    while (true) {
+                        if (CO == -1)
+                            break;
                         isVisited[headIndex]=true;
                         float currentDis = distance[headIndex] + coWeight(headIndex,CO) + delay;
                         if (currentDis<distance[CO]) {
@@ -186,6 +189,12 @@ import java.util.*;
                         CO = coNextValue(headIndex, CO);
                         if (CO == -1)
                             break;
+                        while(isVisited[CO]){
+                            CO = coNextValue(headIndex, CO);
+                            if (CO == -1) {
+                                break;
+                            }
+                        }
 
                     }
                 }
@@ -197,9 +206,9 @@ import java.util.*;
             for (int i = 0; i <15 ; i++) {
                 path[i] = path[i]+" "+Edge.getName(i);
             }
- //           System.out.println("Iniciar nodo:"+Edge.getName(index));
+//            System.out.println("Iniciar nodo:"+Edge.getName(index));
 //            for (int i = 0; i <15 ; i++) {
-                System.out.println(Edge.getName(end)+"   "+distance[end]+"   "+path[end]);
+//                System.out.println(Edge.getName(i)+"   "+distance[i]+"   "+path[i]);
 //            }
             return new String[]{Edge.getName(end), String.valueOf(distance[end]), path[end]};
 
@@ -228,7 +237,7 @@ import java.util.*;
 //
 //            // print the graph as an adjacency list
 //            System.out.println(graph.adj_list.get(1).get(2).value);
-//            System.out.println(graph.dijkStra(0, 4)[1]);
+//            System.out.println(graph.dijkStra(3, 7, 0)[1]);
 //            //Graph.printGraph(graph);
 //        }
 //    }
