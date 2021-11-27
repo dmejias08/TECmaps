@@ -3,7 +3,9 @@ package Interface;
 import javax.swing.*;
 
 public class Places {
-
+/*
+Returns a JOption pane with the information of each place according to the String argument
+ */
     public static void getInfo(String place){
         String info;
         switch (place){
