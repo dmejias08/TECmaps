@@ -34,12 +34,12 @@ import java.util.*;
                 for(int j = 0; j<15; j++){
                     if(relationship[i][j] == 1)
 //                        edges.add(new Edge(i, j, 1));
-                        edges.add(new Edge(i, j, Edge.getWeight(i,j,0)));
+                        edges.add(new Edge(i, j, Edge.getWeight(i,j)));
                 }
             }
         return edges;
         }
-        private static int getWeight(int src, int dest , int delay) throws Exception {
+        private static int getWeight(int src, int dest) throws Exception {
             // Get city's names
             String origin = cities.get(src);
             String destination = cities.get(dest);
@@ -58,7 +58,7 @@ import java.util.*;
 
             // create weight
 
-            return Math.round(timeMinutes) + delay;
+            return Math.round(timeMinutes);
         }
         public static String getName(int scr){
             return cities.get(scr);
