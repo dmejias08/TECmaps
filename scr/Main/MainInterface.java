@@ -6,7 +6,9 @@ import java.util.ArrayList;
 
 import Interface.About;
 
+//Class that contains the main elements of the UI
 public class MainInterface extends JFrame implements ActionListener, KeyListener, MouseListener {
+    //Graphic Elements
     public static String[] places = Edge.cities.toArray(new String[0]);
     public ArrayList<JLabel> blueImages=new ArrayList<>();
     public ArrayList<JLabel> redImages=new ArrayList<>();
@@ -27,6 +29,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
     public ImageIcon mapPic;
     private Graph graph;
 
+    //Constructor
     public MainInterface() {
         this.setTitle("TEC Maps");
         this.setVisible(true);
@@ -37,6 +40,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         pane.setLayout(null);
         pane.setBackground(Color.decode("#fff9eb"));
 
+        //Loading the pictures for the routes, red and blue ones, and locating them in an arraylist
         for (int i=2; i<32; i++){
             JLabel imagePlace;
             ImageIcon image;
@@ -53,12 +57,14 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
             }
         }
 
+        //Loading the main map
         mapPic= new ImageIcon("assets/map.png");
         map = new JLabel(mapPic);
         map.setSize(823,650);
         map.setLocation(0,80);
         pane.add(map);
 
+        //Creating buttons
         calculate = new JButton("");
         calculate.setSize(125,40);
         calculate.setLocation(600, 20);
@@ -67,7 +73,6 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         calculate.setIcon(new ImageIcon("assets/goButton.png"));
         calculate.addMouseListener(this);
         calculate.setBorder(null);
-
         pane.add(calculate);
 
         additional = new JButton("");
@@ -79,6 +84,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         additional.setBorder(null);
         pane.add(additional);
 
+        //Creating Labels
         lStart = new JLabel("Inicio:");
         lStart.setSize(60,40);
         lStart.setLocation(25, 20);
@@ -115,6 +121,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         lTime.setFont(new Font("Girassol",Font.PLAIN,16));
         pane.add(lTime);
 
+        //Creating Combo Boxes
         start = new JComboBox(places);
         start.setSize(125,30);
         start.setLocation(75, 25);
@@ -127,6 +134,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
         end.setFont(new Font("Girassol",Font.PLAIN,16));
         pane.add(end);
 
+        //Creating Text Fields
         delay = new JTextField();
         delay.setSize(75,30);
         delay.setLocation(490, 25);
@@ -140,6 +148,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
 
         JOptionPane.showMessageDialog(null,"Iniciando...");
 
+        //Starting the API
         try {
             this.graph = new Graph(Edge.createEdgeList());
             JOptionPane.showMessageDialog(null,"Iniciado");
@@ -151,6 +160,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        //Events for pressing the Calculate button
         if (e.getSource() == calculate){
             for (int i=0; i<15; i++){
                 blueImages.get(i).setVisible(false);
@@ -190,6 +200,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
                 }
             }
 
+            //Event for pressing the additional info button
         } else if (e.getSource() == additional){
             About about = new About();
         }
@@ -198,6 +209,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
 
     @Override
     public void keyTyped(KeyEvent e) {
+        //Validating the entry of numbers in the delay Text Field
         char key = e.getKeyChar();
         if (key>47 && key<58) {
         } else {
@@ -207,6 +219,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
 
     @Override
     public void mouseEntered(MouseEvent e) {
+        //Graphic effects for pressing the button
         if (e.getSource().equals(calculate)){
             calculate.setIcon(new ImageIcon("assets/goButtonHover.png"));
         }
@@ -242,6 +255,7 @@ public class MainInterface extends JFrame implements ActionListener, KeyListener
 
     @Override
     public void mouseExited(MouseEvent e) {
+        //Graphic effects for exiting the area of the button
         if (e.getSource().equals(calculate)){
             calculate.setIcon(new ImageIcon("assets/goButton.png"));
         }
